@@ -12,7 +12,8 @@ namespace mgbot
     class Program
     {
         static void Main(string[] args)
-                  => new Program().StartAsync().GetAwaiter();
+        
+         => new Program().StartAsync().GetAwaiter();
         
         
         // bot named _client
@@ -22,11 +23,14 @@ namespace mgbot
 
         public async Task StartAsync()
         {
+
             _client = new DiscordSocketClient();
 
             await _client.LoginAsync(TokenType.Bot, "discord bot token");
 
             await _client.StartAsync();
+
+            new CommandModule(_client);
 
             // hook onto ready event
             _client.Ready += Ready;
@@ -37,9 +41,18 @@ namespace mgbot
 
                 //run command module?
                 //do stuff in here
-
+              
             }
+
+            await Task.Delay(-1);
         }
+
+        async Task GiveRole(IGuildUser user, string rolename)
+        {
+
+        }
+
+
     }
 }
 
